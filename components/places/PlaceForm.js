@@ -19,6 +19,7 @@ import {
 } from "../../store/MyAppSlice";
 import { useNavigation } from "@react-navigation/native";
 import FilledButton from "../UI/FilledButton.js";
+import { insearPlacedb } from "../../utils/database.js";
 
 export default function PlaceForm() {
   const navigation = useNavigation();
@@ -36,7 +37,7 @@ export default function PlaceForm() {
 
     try {
       const placeData = {
-        id: new Date().toString() + Math.random().toString(),
+        // id: new Date().toString() + Math.random().toString(),
         title: inputTitle,
         imageUri: selectedImageUri,
         location: {
@@ -46,7 +47,16 @@ export default function PlaceForm() {
         },
       };
 
-      dispatch(addFavoritePlace(placeData));
+      console.log("first init ", placeData);
+
+      const insertResult = await insearPlacedb(placeData);
+
+      const placeDataWithId = {
+        ...placeData,
+        id: insertResult.lastInsertRowId,
+      };
+
+      dispatch(addFavoritePlace(placeDataWithId));
       navigation.pop();
     } catch (error) {
       console.error("Error saving place:", error);

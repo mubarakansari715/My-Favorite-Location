@@ -14,9 +14,22 @@ import { IconButton } from "react-native-paper";
 import MapViewScreen from "./screens/MapView";
 import AppLoading from "expo-app-loading";
 import { useEffect, useState } from "react";
+import { init } from "./utils/database";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
+  const [dbInitialize, setDbInitialize] = useState(false);
+  useEffect(() => {
+    init()
+      .then(() => {
+        setDbInitialize(true);
+      })
+      .catch(() => {
+        console.log("database initialize faild");
+        setDbInitialize(false);
+      });
+  }, [dbInitialize]);
+
   function NavigationLayout() {
     return (
       <NavigationContainer>
