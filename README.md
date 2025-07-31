@@ -847,6 +847,7 @@ expo publish
 # Install Expo CLI globally
 npm install -g @expo/cli
 
+
 # Create new Expo project
 npx create-expo-app MyLocationMapApp
 
