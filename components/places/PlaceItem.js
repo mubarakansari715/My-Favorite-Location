@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
+import { Colors } from "../../Constants/Colors";
 
 export default function PlaceItem({ place, onPress }) {
   const imageSource =
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: "row",
     margin: 10,
-    backgroundColor: "#b1b1",
+    backgroundColor: Colors.primary100,
     borderRadius: 10,
   },
   imageStyle: {

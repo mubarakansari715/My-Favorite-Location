@@ -47,8 +47,6 @@ export default function PlaceForm() {
         },
       };
 
-      console.log("first init ", placeData);
-
       const insertResult = await insearPlacedb(placeData);
 
       const placeDataWithId = {

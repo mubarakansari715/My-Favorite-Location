@@ -16,7 +16,6 @@ export function init() {
 }
 
 export async function insearPlacedb(place) {
-  console.log("insert data init", place);
   try {
     return database.runAsync(
       `INSERT INTO places (title, imageUri, address, lat, long) VALUES (?,?,?,?,?)`,
@@ -30,5 +29,33 @@ export async function insearPlacedb(place) {
     );
   } catch (error) {
     console.log("Insert faild in db");
+  }
+}
+
+export async function getAllPlcaesFromDb() {
+  try {
+    const response = await database.getAllAsync("SELECT * FROM places");
+
+    const placesResponse = [];
+
+    // for(const data of response){
+
+    //   console.log(data.title);
+    // }
+
+    response.forEach((element) => placesResponse.push({
+      id: element.id,
+      title: element.title,
+      imageUri:element.imageUri,
+      location:{
+        lat:element.lat,
+        long:element.long,
+        address:element.address
+      }
+    }));
+
+    return placesResponse;
+  } catch (error) {
+    console.error("fetch all places is failed");
   }
 }
